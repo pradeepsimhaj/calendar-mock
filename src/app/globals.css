@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Accent colors for hover/active/focus states */
+  --accent: #3b82f6; /* blue-500 */
+  --accent-hover: #2563eb; /* blue-600 */
+  --accent-active: #1d4ed8; /* blue-700 */
+  --border-color: #e5e7eb; /* gray-200 */
 }
 
 @theme inline {
@@ -16,11 +22,73 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --accent: #60a5fa; /* lighter blue for dark mode */
+    --accent-hover: #3b82f6;
+    --accent-active: #2563eb;
+    --border-color: #374151;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ===== Hover & Focus Effects for Interactive Elements ===== */
+
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="text"],
+select,
+textarea {
+  transition: all 0.2s ease;
+}
+
+/* Hover state */
+button:hover,
+a:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+select:hover,
+textarea:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-hover);
+}
+
+/* Focus or active (selected) state */
+button:focus,
+button:active,
+a:focus,
+a:active,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-active);
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+/* ===== For currently selected nav/menu items ===== */
+.nav-active,
+[aria-current="page"],
+.active {
+  color: var(--accent-active) !important;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-active);
+}
+
+/* ===== Smooth transitions for UI elements ===== */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ===== Optional: subtle hover highlight for cards/containers ===== */
+.card:hover {
+  background-color: rgba(59, 130, 246, 0.05);
+  border-color: var(--accent);
 }
