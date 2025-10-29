@@ -7,10 +7,12 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '../../lib/auth';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
-import { parseISO, isBefore, isAfter } from 'date-fns';
+import { parseISO, isBefore, isAfter, addHours } from 'date-fns';
 import EventModal, { AppEvent } from '../../components/EventModal';
 
-const FullCalendar = dynamic(() => import('@fullcalendar/react'), { ssr: false });
+// *** IMPORTANT FIX: cast dynamic import to `any` so `ref` is allowed by TS during build ***
+const FullCalendar = dynamic(() => import('@fullcalendar/react'), { ssr: false }) as unknown as any;
+
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
